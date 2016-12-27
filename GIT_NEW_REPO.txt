@@ -1,0 +1,33 @@
+git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080   =====> Proxy Configuration
+
+- git clone https://github.com/MY_FORK/repo.git FOLDER_NAME
+- cd FOLDER_NAME
+- git remote add upstream https://github.com/MAIN_REPO/repo.git
+    - git remote -v {List all remotes}
+        origin  https://github.com/MY_FORK/repo.git
+        upstream  https://github.com/MAIN_REPO/repo.git
+- git fetch upstream
+- git checkout -b CHILD_BRANCH upstream/CHILD_BRANCH
+    - git branch -l {List all branches}
+        master
+        CHILD_BRANCH
+--------------------------------------------------------------------
+Daily
+======
+- git status
+- git pull upstream BRANCH_NAME
+- git add
+- git commit -m "COMMENTS"
+- git push origin BRANCH_NAME
+--------------------------------------------------------------------
+{Create new branch} = git checkout -b NEW_BRANCH upstream/NEW_BRANCH
+
+{Switch between branches} = git checkout BRANCH_NAME
+
+{revert to particular commit} = git reset --hard 64d4127c40b4d3c2a6bafe54d22128e10b7b9ca8
+
+{create a tag} = git tag -a TAG_NAME -m 'COMMENTS'
+
+{Push all tag} = git push origin --tags
+
+{list all tag} = git tag

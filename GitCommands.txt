@@ -1,0 +1,205 @@
+git submodule add https://sathish-igate:%40igate01@github.com/sathish-igate/charactersunite_usa.git "docroot/sites/charactersunite_usa"
+
+git remote -v 
+
+git remote add upstream https://sathish-igate:%40igate01@github.com/NBCUOTS/charactersunite_usa.git
+git remote add siva https://sathish-igate:%40igate01@github.com/sivarajank/charactersunite_usa.git
+
+git fetch upstream
+
+git checkout -b dev upstream/dev
+
+git status
+
+git add libraries modules themes .gitignore
+
+git commit -m ''
+
+git config --global user.email "sathish.b@igate.com"
+git config --global user.name "sathish-igate"
+
+git push origin dev > git push <repo> <branch>
+
+Send Pull Request from your fork to NBCUOTS
+
+git pull upstream dev
+git pull siva dev
+
+
+https://github.com/NBCUOTS/charactersunite_usa/pull/2
+--------------------------------------------------------------------------------------------------
+New SetUp
+
+upstream - Main Repository
+Origin - Users Fork
+
+git submodule add https://sathish-igate:%40igate01@github.com/sathish-igate/charactersunite_usa.git "docroot/sites/charactersunite_usa"
+git branch -l {List all branches}
+git remove -v
+git remote add upstream <GIT REPO URL> {add branch}
+git remove -v
+git fetch upstream {Get all branch reference}
+git branch -l
+git log
+git checkout -b dev upstream/dev {add dev branch pointing to upstream/dev}
+
+git pull upstream {fetch + merge}
+
+--------------------------------------------------------------------------------------------------
+- go to local git path (C:\xampp\htdocs\publisher7\docroot\sites\charactersunite_usa)
+- git status
+- git pull upstream dev
+- git add
+- git commit -m "COMMENTS"
+- git push origin dev
+--------------------------------------------------------------------------------------------------
+git branch -a
+git remote
+git remote -v
+--------------------------------------------------------------------------------------------------
+Daily
+
+git pull upstream dev
+after modify/add
+git add files
+git commit
+git push origin <branch_name>
+
+To revert a particular file change in local to online version -> git checkout filename
+-----------------------------------------------------------------------------------------------------
+
+Go to 
+
+cd /c/xampp/htdocs/publisher7_usa/docroot/sites/usanetwork
+
+git checkout dev  	{To go to a branch}
+
+git status 			{Shows list of files modified, not tracked, commited}
+
+git remove -v		{Shows origin and upstream list}
+
+git pull upstream dev	{To get updated code from Main Original Branch}
+
+git log				{Shows list of updates in branch }
+
+git status 			{Shows list of files modified, not tracked, commited}
+
+git add themes		{add a file/folder to be commited}	
+
+git reset themes	{revert the added file/folder to be comitted}
+
+git commit -m "COMMENTS" 	{to commit the added/modified changes}
+
+git push origin dev	{To push the changes to dev branch}
+
+
+---------------------------------------------------------------------------------------------------------------
+Conflict
+-remove unwanted from local file
+-git reset
+-git status
+-git diff modules/
+-git status
+-git checkout modules
+---------------------------------------------------------------------------------------------------------------
+Git reset to a particular revision
+-git fetch upstream
+-git reset --hard upstream/dev
+-git push -f origin dev
+---------------------------------------------------------------------------------------------------------------
+Merged some changes to pub7_usanetwork but got error. At the same time made another chnage and pushed to my branch but yet to be merged.
+- git checkout -b TEMP_BRANCH
+- git checkout CURRENT_BRANCH
+- git reset --hard 64d4127c40b4d3c2a6bafe54d22128e10b7b9ca8
+go to the specified commit update the changes and commit/push
+- git pull upstream Branch
+- git merge TEMP_BRANCH
+will get new changes in local
+---------------------------------------------------------------------------------------------------------------
+Git Create TAG and Push TAG
+-git tag -a v1.0 -m 'Initial Commit'
+-git push origin --tags
+
+list all tag
+-git tag
+-git show <TAG>
+---------------------------------------------------------------------------------------------------------------
+[21:15] <bleen> git remote add acquia usanetwork@svn-3224.prod.hosting.acquia.com:usanetwork.git
+[21:15] <bleen> git push acquia name_of_tag
+
+---------------------------------------------------------------------------------------------------------------
+
+ACQUIA
+
+-git remote add acquia nbcuunite@svn-3224.prod.hosting.acquia.com:nbcuunite.github
+-git push acquia v1.0
+
+Check if SSH key exists
+- ssh-keygen -lf ~/.ssh/id_rsa.pub
+
+If Not exists
+- ssh-keygen -t rsa -C "sathish.b@igate.com"
+
+- create a file 'config' inside "C:\Users\sb821730\.ssh" and type "ProxyCommand "C:\Program Files\git\bin\connect.exe" -H localhost:1540 %h %p" save this
+
+-git push acquia v1.0
+
+---------------------------------------------------------------------------------------------------------------
+nbcuunite.dev@staging-4009.prod.hosting.acquia.com
+ACQUIA DRUSH
+
+- ssh nbcuunite.dev@staging-4009.prod.hosting.acquia.com    // login to server
+- drush sa // list all the server alias names
+- drush5 @nbcuunite.dev cc all // clear cache drush5 @SERVER_ALIAS_NAME cc all
+
+
+
+---------------------------------------------------------------------------------------------------------------
+Generate SSH key 
+
+$ ssh-keygen -t rsa -C "sathish.b@igate.com"
+
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/sb821730/.ssh/id_rsa):
+Created directory '/c/Users/sb821730/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/sb821730/.ssh/id_rsa.
+Your public key has been saved in /c/Users/sb821730/.ssh/id_rsa.pub.
+The key fingerprint is:
+19:33:42:db:9e:51:3f:a0:6c:a4:eb:db:54:c5:1b:42 sathish.b@igate.com
+sb821730@GDCWFDT821730 /c/xampp/htdocs/Publisher7_charactersunite (newdev)
+
+$ git remote -v
+acquia  nbcuunite@svn-3224.prod.hosting.acquia.com:nbcuunite.git (fetch)
+acquia  nbcuunite@svn-3224.prod.hosting.acquia.com:nbcuunite.git (push)
+origin  https://github.com/sathish-igate/charactersunite_usa.git (fetch)
+origin  https://github.com/sathish-igate/charactersunite_usa.git (push)
+upstream        https://github.com/NBCUOTS/charactersunite_usa.git (fetch)
+upstream        https://github.com/NBCUOTS/charactersunite_usa.git (push)
+sb821730@GDCWFDT821730 /c/xampp/htdocs/Publisher7_charactersunite (newdev)
+
+$ git push acquia v1.0
+ssh: svn-3224.prod.hosting.acquia.com: no address associated with name
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+sb821730@GDCWFDT821730 /c/xampp/htdocs/Publisher7_charactersunite (newdev)
+
+$ git push acquia v1.0
+The authenticity of host 'svn-3224.prod.hosting.acquia.com (<no hostip for prox
+ command>)' can't be established.
+RSA key fingerprint is c6:e2:45:8e:d4:8a:d6:4f:a9:0c:ae:0e:25:b3:1f:4f.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'svn-3224.prod.hosting.acquia.com' (RSA) to the list
+of known hosts.
+Enter passphrase for key '/c/Users/sb821730/.ssh/id_rsa':
+Counting objects: 1556, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (1419/1419), done.
+Writing objects: 100% (1553/1553), 20.54 MiB | 99 KiB/s, done.
+Total 1553 (delta 139), reused 761 (delta 91)
+To nbcuunite@svn-3224.prod.hosting.acquia.com:nbcuunite.git
+ * [new tag]         v1.0 -> v1.0
+sb821730@GDCWFDT821730 /c/xampp/htdocs/Publisher7_charactersunite (newdev)

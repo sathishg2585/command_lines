@@ -1,0 +1,15 @@
+git clone https://github.com/sathish-igate/Publisher7_usanetwork.git FOLDER_NAME
+git remote add upstream https://github.com/NBCUOTS/Publisher7_usanetwork.git
+git fetch upstream
+git checkout -b new-dev upstream/new-dev
+
+Update - settings.local.php
+
+Export DB from acquia and Import in local ( C:\xampp\mysql\bin>mysql -u root -p usanetwork < C:\Users\sb821730\Downloads\DB.sql )
+
+REGISTRY REBUILD
+----------------
+http://usanetwork.local.usanetwork.com/sites/usanetwork/modules/contrib/registry_rebuild/registry_rebuild.php
+
+
+http://features.charactersunite.com/sites/all/drush/commands/registry_rebuild/registry_rebuild.php

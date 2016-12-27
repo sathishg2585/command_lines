@@ -1,0 +1,7 @@
+https://basecamp.com/2143051/projects/2004987/documents/3722417
+
+gem install --http-proxy http://localhost:8888 compass
+
+compass create PROJECT_NAME
+
+compass watch (go to config.rb location and run this command)

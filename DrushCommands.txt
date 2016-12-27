@@ -1,0 +1,46 @@
+drush cc all - clear all cache
+drush fra -y - ?
+drush cc all
+drush updb
+drush cc drush
+drush fra –y 
+drush cc all
+drush core-cron
+
+drush ws --tail = to display dblog
+
+- drush5 @nbcuunite.dev cc all
+- drush5 @nbcuunite.dev publisher-site-install
+
+drush site-install standard --account-name=admin --account-pass=admin --account-mail=sathish.b@igate.com --site-name=DrupalLocal --site-mail=sathish.b@igate.com --db-url=mysql://root:@localhost/drupal
+
+http://tylerfrankenstein.com/code/use-drush-export-import-drupal-mysql-database-dump-file
+http://tylerfrankenstein.com/code/drupal-how-make-backup-copy-mysql-database
+
+
+REGISTRY REBUILD
+----------------
+http://usanetwork.local.usanetwork.com/sites/usanetwork/modules/contrib/registry_rebuild/registry_rebuild.php
+
+Migrate (help link - https://www.drupal.org/node/1839738)
+-------
+drush migrate-deregister --orphans
+
+ACQUIA DRUSH
+-------------
+
+nbcuunite@staging-4009:/mnt/gfs/home/nbcuunite$ drush @nbcuunite.dev ac-site-info --email=sathish.b@igate.com --key=SonyXperiaC01
+ name              :  prod:nbcuunite
+ vcs_type          :  git
+ vcs_url           :  nbcuunite@svn-3224.prod.hosting.acquia.com:nbcuunite.git
+ production_mode   :  0
+ unix_username     :  nbcuunite
+ title             :  NBCU - USA Network - Characters Unite
+ uuid              :  e78cd8c6-1ddb-d614-b192-2ae2bda970aa
+ 
+ 
+ 
+FEATURES
+---------
+UPDATE DB TO CODE => drush fu MODULE_NAME
+UPDATE CODE TO DB => drush fr MODULE_NAME

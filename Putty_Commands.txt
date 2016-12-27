@@ -1,0 +1,150 @@
+To tar 
+-------
+tar zvcf /home_dir/file.tar.gz /source
+tar zvcf /var/www/stage.characterbrandworks.com/tar_files/characterbrandworks_staging_11-aug-14.tar.gz /var/www/stage.characterbrandworks.com/
+
+tar zvcf /var/www/stage.characterbrandworks.com/tar_files/characterbrandworks_staging_drupal_11-aug-14.tar.gz /var/www/stage.characterbrandworks.com/drupal/
+
+tar -zvcf backup.tar.gz /var/www/wm/
+
+tar -zvcf dev.origin.universalgamenet.com_17-nov.tar.gz /var/www/dev.origin.universalgamenet.com/dev --exclude="mp3" --exclude="_cache" --exclude=".svn"
+tar -zvcf dev.origin.universalgamenet.com_15-dec.tar.gz /var/www/dev.origin.universalgamenet.com/dev --exclude="mp3" --exclude="_cache" --exclude=".svn"
+tar -zvcf dev.origin.universalgamenet.com_17-nov.tar.gz /var/www/dev.origin.universalgamenet.com/dev --exclude="mp3" --exclude="avi" --exclude="logs" --exclude=".svn"
+
+tar -zvcf origin.universalgamenet.com_22-Jul-16.tar.gz /var/www/origin.universalgamenet.com --exclude=".mp3" --exclude=".avi" --exclude=".mp4" --exclude="_cache" --exclude=".svn" --exclude="avatar_uploads" --exclude=".swf" --exclude="resources"
+
+tar -zvcf dev.origin.universalgamenet.com_22-Jul-16.tar.gz /var/www/dev.origin.universalgamenet.com/dev --exclude=".mp3" --exclude=".avi" --exclude=".mp4" --exclude="_cache" --exclude=".svn" --exclude="avatar_uploads" --exclude=".swf" --exclude="resources"
+
+tar -zvcf wm_prod_15-Feb-16.tar.gz /var/www/wm --exclude=".mp3" --exclude=".avi" --exclude=".mp4" --exclude=".swf" --exclude=".svn" --exclude=".flv" --exclude="1999" --exclude="2000" --exclude="2001_bak" --exclude="2001_cgi" --exclude="2002" --exclude="2003" --exclude="2004" --exclude="2005" --exclude="2006" --exclude="2007" --exclude="2008" --exclude="2009" --exclude="2010" --exclude="2011" --exclude="2012" --exclude="2013" --exclude="2014" --exclude="2015" --exclude="bak" --exclude="ed" --exclude="ed_2001" --exclude="images_old" --exclude="junk" --exclude="results99" --exclude="tar_files" --exclude="testdir" --exclude="wkcapp" --exclude="wm2000_00" --exclude=".bak" --exclude=".tar" --exclude=".zip" --exclude="mediacenter" --exclude="DB_BU" --exclude=".cache.js"
+
+To extract .tar file
+----------------------
+tar -xf file.tar
+
+To tar only .php files in a specific directory
+-----------------------------------------------
+find /var/www/wm/ -name "*.php" -o -name "*.dummyyyyy" | tar -zvcf wm_prod_after_update_16-feb-16_2pm.tar.gz -T -
+
+
+To search a text in folders
+----------------------------
+grep -rl 'bodytext' .
+
+grep -rl 's_code' /var/www/www.charactersunite.com/
+
+grep -rl 'SEARCH_TEXT' /location
+
+To Remove
+---------
+rm filename
+
+To get list of files updated from pervious day
+-----------------------------------------------
+find . -mtime -1
+find -cmin -120 (120 minutes ago)
+
+To get list of files updated before minutes
+-----------------------------------------------
+find . -mmin -600
+
+To find a directory in server
+-----------------------------
+
+find /var/www/ -maxdepth 1 -type d -iname '*10secondsoffame*'
+
+find /var/www/ -maxdepth 1 -type d -iname '*SEARCH_TEXT*'
+
+
+
+tail -f   /var/www/wm/test/2015/import/log/cron.status.txt
+
+wc -l  /var/www/wm/test/2015/import/log/cron.status.txt
+
+CRON JON for every 15 mins
+----------------------------
+*/15 * * * * /opt/php-5.2.17/bin/php /var/www/wm/test/2015/import/doggieandjr.php > /var/www/wm/test/2015/import/log/cron.status.txt
+*/10 * * * * /opt/php-5.2.17/bin/php /var/www/wm/test/2015/import/doggieandjr.php > /var/www/wm/test/2015/import/log/cron.status.txt
+
+
+*/1 * * * * /opt/php-5.2.17/bin/php /var/www/wm/test/2015/import/doggieandjr.php > /var/www/wm/test/2015/import/log/cron.status.txt
+
+
+
+Locate PHP path in linux
+-------------------------
+locate php | grep bin
+
+Check PHP version
+-------------------
+/opt/php-5.2.17/bin/php -v
+
+ php composer.phar
+
+
+COPY FILES FROM ONE SERVER TO ANOTHER
+--------------------------------------
+scp -r /source/* 206441529@216.178.102.31:/destination/
+
+
+Check if Apache is Installed
+-----------------------------
+ps -ef | grep httpd
+
+Restart apache in redhat linux server
+---------------------------------------
+PATH_TO_APACHE/apache2/bin/
+ll (or) ls
+./apachectl -k graceful
+
+/etc/init.d/httpd configtest
+sudo /etc/init.d/httpd graceful
+
+/etc/init.d/httpd configtest
+/etc/init.d/httpd graceful
+/etc/init.d/httpd restart
+/etc/init.d/httpd stop
+/etc/init.d/httpd start
+
+To check apache version
+--------------------------
+PATH_TO_APACHE/apache2/bin/
+ll (or) ls
+./httpd -version
+./apachectl -version
+
+
+To check sendmail status
+--------------------------
+sudo /etc/init.d/sendmail status
+
+
+To kill a pid
+--------------
+netstat -plntu | grep 3000
+kill -9 PID
+
+
+Editor
+---------
+
+vi filename
+vim filename // code highlights
+
+inside editor
+:q -> quit
+:q! -> force quit without saving
+:wq -> write and quit
+
+ESC i -> insert code
+ESC /[TYPE TEXT] -> search
+  n -> next search text
+  shift+n -> previous search text
+
+:$ -> go to last line of a file
+:0 -> go to first line of a file
+:5 -> go to 5th line fo a file
+
+MAN
+----
+
+man COMMAND_NAME -> shows help

@@ -1,0 +1,102 @@
+MUKESH Commands
+================
+
+WITHOUT LOGIN
+-------------
+pwd
+ssh nbcuunite.dev@staging-4009.prod.hosting.acquia.com
+SonyXperiaC01
+ls -lrta
+
+COPY FILES => rsync -av ntuser.dat.LOG1 nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/tmp/
+COPY FILES => scp -av ntuser.dat.LOG1 nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/tmp/
+COPY FILES => scp ntuser.dat.LOG1 nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/tmp/
+
+AFTER LOGIN
+-----------
+
+ONE TIME PASSWORD => drush @nbcuunite.dev uli
+OPEN MYSQL TREMINAL => drush @nbcuunite.dev sqlc
+SHOW SITE STATUS => drush @nbcuunite.dev st
+
+DOCROOT => cd /var/www/html/nbcuunite.dev/docroot/sites/default/
+FILES LOCATION => cd /mnt/files/nbcuunitedev/sites/default/
+ERROR LOGS => cd /var/log/sites/nbcuunite.dev/logs/staging-4009/
+ 
+view drupal-watchdog.log
+ls -lrta
+
+
+
+
+
+copy all the content from local to Acquia
+-------------------------------------------
+cp -R /mnt/public/* acquia/files/
+
+rsync -av /mnt/public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/files/nbcuunitedev/sites/default/files/
+scp -r public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/sites/charactersunite/files/public/
+
+
+scp -r public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/sites/charactersunite/files/
+
+scp -r ustudios/* 206441529@216.178.102.31:/var/www/origin.assets.usanetwork.com/htdocs/www2/
+
+DEV:
+----
+nbcuunite.dev@staging-4009.prod.hosting.acquia.com
+
+STAGE:
+-------
+nbcuunite.test@staging-4009.prod.hosting.acquia.com
+
+PROD:
+------
+nbcuunite.prod@web-5658.prod.hosting.acquia.com
+
+
+
+
+LOG FIle
+----------
+cd /var/log/sites/nbcuunite.dev/logs/staging-4009/
+
+
+Default Site EMial
+-------------------
+admin@publisher.nbcuni.com
+
+
+RESTORE DB
+----------
+scp DB.sql nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/tmp/
+drush @nbcuunite.dev sqlc < /mnt/tmp/DB.sql
+
+COPY from Remote to Local
+--------------------------
+
+scp nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/home/nbcuunite/drush-backups/nbcuunitedev/2015031907224/nbcuunitedev_20150319_073225.sql files/
+
+QUESTIONS
+--------------
+how to get Administrator credentials/permission ? 
+If i need to SSH acquia server what is the url for dev and also for stage? how to identofy it ?
+For sql-sync do i need the database in another server or can or do it from my local mysql ?
+If i use sql-sync whether it will delete existing db tables or do i need to do it manually ?
+
+What is the actual Drush alias used for characters unite ?
+nbcuunite
+nbcuunite.acceptance
+nbcuunite.acceptance.livedev
+nbcuunite.dev
+nbcuunite.dev.livedev
+nbcuunite.prod
+nbcuunite.prod.livedev
+nbcuunite.test
+nbcuunite.test.livedev
+none
+
+How to get autual SSH url for dev/stage/production ?
+How to push files ?
+
+

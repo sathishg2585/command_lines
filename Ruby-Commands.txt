@@ -1,0 +1,48 @@
+To find controller
+$ bundle exec rake routes | grep users   
+
+To restart rails application
+$ touch tmp/restart.txt
+
+To remove assets folder
+$ rake assets:clobber
+
+To precompile assets
+$ RAILS_ENV=production rake assets:precompile
+
+To clear tmp
+$ RAILS_ENV=production rake tmp:clear
+
+To clen assets
+$ RAILS_ENV=production rake assets:clean
+
+To see latest logs
+tail -f log/production.log
+
+Function definition
+def logout 
+  puts "==========>"       // output string
+  puts request.url
+  puts request.path
+ logger.info "*********"  // log output
+ logger.info request.url
+ logger.info request.path
+end
+
+
+
+
+
+449-1530 (Ram Extn)
+
+
+
+
+
+
+DELETE FROM users WHERE users.id = 44615;
+DELETE FROM users WHERE users.id = 44614;
+Last record as of now 44607
+34691-db rows in users
+
+https://www.phusionpassenger.com/library/walkthroughs/basics/ruby/fundamental_concepts.html

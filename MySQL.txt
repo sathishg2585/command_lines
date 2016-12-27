@@ -1,0 +1,31 @@
+mysql -h localhost -u root -p DB_NAME < "C:\Documents\Userdata\backup\Desktop\sql\backup-2014-04-01-08-08-usanetwork-7730548.sql"
+
+backup: # mysqldump -u root -p[root_password] [database_name] > dumpfilename.sql
+
+restore:# mysql -u root -p[root_password] [database_name] < dumpfilename.sql
+mysql -u root -p wkcstage < C:\Users\sb821730\Documents\Userdata\WKC\Staging\09-Jan-15\doggie_3.sql
+
+Login:#  mysql -h HOST -u DB_USERNAME -p -D DB_NAME
+Login:#  mysql -h 216.178.107.216 -u usadgdecdsusr01 -p -D USASDGDCDEP01
+Login:#  mysql -h 216.178.106.79 -u usadgdecdsusr01 -p -D USASDGDCDEP01
+Login:#  mysql -h 216.178.107.242 -u ugndusr -p -D d_pub_ugn ugnDCp@ss
+
+desc TABLE_NAME;
+show tables;
+
+216.178.106.75
+mysqldump --single-transaction -h 216.178.106.75 -u wswnkstsusr01 -p WPSSWMNSTBG01 --set-gtid-purged=OFF > stage_blog_db1.sql
+mysqldump -h 216.178.106.75 -u wswnkstsusr01 -p WPSSWMNSTBG01 > stage_blog_db.sql
+mysqldump -h 216.178.106.79 -u usawmkclwksusr01 -p USASWMKCLWK01 --set-gtid-purged=OFF > wkc_17feb16.sql
+
+mysqldump -h 216.178.106.81 -u usawmkclwkpusr01 -p USAPWMKCLWK01 --set-gtid-purged=OFF > wkc_16feb15_latest.sql
+mysqldump -h 216.178.107.242 -u ugndusr -p d_pub_ugn --set-gtid-purged=OFF > ugn.sql
+
+CREATE DUMMY TABLE FROM ORIGINAL TABLE
+---------------------------------------------
+create table dgoggie_old select * from doggie
+
+
+MYSQLDUMP A DATABASE TABLE BASED ON A CONDITION
+------------------------------------------------
+mysqldump -u root -p wkc_to_production breeds --where="year = 2015" > C:\Users\sb821730\Documents\Userdata\WKC\Staging\11-Feb-15\test.sql

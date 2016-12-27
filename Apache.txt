@@ -1,0 +1,3 @@
+APACHE DEBUG
+
+httpd.exe -w -e debug

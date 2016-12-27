@@ -1,0 +1,7 @@
+composer install --prefer-source
+
+COMPOSER_PROCESS_TIMEOUT=5000 composer install --prefer-source
+
+composer clearcache
+composer clear-cache
+
