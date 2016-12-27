@@ -31,16 +31,18 @@ ls -lrta
 
 
 copy all the content from local to Acquia
--------------------------------------------
+-----------------------------------------
 cp -R /mnt/public/* acquia/files/
 
 rsync -av /mnt/public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/files/nbcuunitedev/sites/default/files/
 scp -r public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/sites/charactersunite/files/public/
 
 
-scp -r public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/sites/charactersunite/files/
+local to remote  -> scp -r public/* nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/sites/charactersunite/files/
 
-scp -r ustudios/* 206441529@216.178.102.31:/var/www/origin.assets.usanetwork.com/htdocs/www2/
+
+remote to local -> scp -r nbcuunite.dev@staging-4009.prod.hosting.acquia.com:/mnt/gfs/nbcuunitedev/livedev /local
+
 
 DEV:
 ----
