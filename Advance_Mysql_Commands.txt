@@ -1,0 +1,291 @@
+create database DBNAME;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE, CREATE VIEW, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE ON DBNAME.* TO 'username'@'%' IDENTIFIED BY 'password';
+
+show databases;
+
+show processlist;
+
+=======================================================================
+
+stop the mysql services
+mysqladmin -uroot -p -S /mysql/mysql.sock shutdown
+
+Start the mysql services 
+cd /mysql/mysql
+./bin/mysqld_safe --defaults-file=/mysql/conf/my.cnf --basedir=/mysql/mysql --datadir=/mysql/data/data --plugin-dir=/mysql/mysql/lib/plugin --log-error=/mysql/log/errlogs/mysql.err --open-files-limit=33778 --pid-file=/mysql/data/data/aozmpdbld002.dmz.tfayd.com.pid --socket=/mysql/mysql.sock --port=3306 &
+
+
+change master command :
+
+CHANGE MASTER TO MASTER_HOST='216.178.106.69',MASTER_USER='replmaster',MASTER_PASSWORD='replslave',MASTER_PORT=3306,MASTER_LOG_FILE='masterlogfile',MASTER_LOG_POS=position;
+
+=======================================================================
+
+Get a list of locked queries in MySQL:
+
+SELECT now(), r.trx_id waiting_trx_id,  r.trx_mysql_thread_id waiting_thread,
+       (select info from information_schema.processlist where id = r.trx_mysql_thread_id) waiting_query,
+       b.trx_id blocking_trx_id, b.trx_mysql_thread_id blocking_thread,
+       (select info from information_schema.processlist where id = b.trx_mysql_thread_id) blocking_query,
+       (select user from information_schema.processlist where id = b.trx_mysql_thread_id) blocking_user
+FROM       information_schema.innodb_lock_waits w
+INNER JOIN information_schema.innodb_trx b  ON  b.trx_id = w.blocking_trx_id
+INNER JOIN information_schema.innodb_trx r  ON  r.trx_id = w.requesting_trx_id;
+===================================
+
+Easy script to check FW rule for multile IPs and Ports:
+-------------------------------------------------------
+
+iplist="10.11.0.76 10.11.2.122 10.11.0.114 10.11.0.145 10.11.2.94 10.11.0.91"
+portlist="22 8080 8090 8443"
+for i in ${iplist}; do
+for j in ${portlist}; do
+ nc -z -v $i $j
+ done
+done
+
+Check high memory consuming process: 
+-----------------------------------
+
+ps aux --sort -rss | head
+
+Tunnel on MAC:
+--------------
+ssh -i ~/.ssh/id_rsa -L 27016:ec2-52-6-126-13.compute-1.amazonaws.com{this is DB host}:27017 trimes@ec2-54-84-154-5.compute-1.amazonaws.com{This is web server from where DB have access}
+
+then NEW TERM WINDOW: mongo localhost:27016/DB -u user -p Pass
+
+Change ulimit :
+------------
+1)Step : open the sysctl.conf and add this line fs.file-max = 65536
+
+vi /etc/sysctl.conf add end of line fs.file-max = 65536
+
+save and exit.
+
+2)Step : vi /etc/security/limits.conf and add below the mentioned
+
+* soft nproc 65535
+
+* hard nproc 65535
+
+* soft nofile 65535
+
+* hard nofile 65535
+
+check ulimit:
+ulimit -a  {look for open files ...}
+save and exit check max open file ulimit
+
+Kill multiple Db connections: 
+-----------------------------
+
+mysql> select concat('KILL ',id,';') from information_schema.processlist where user='username' and INFO like 'SELECT%' AND TIME>=20 ;
++------------------------+
+| concat('KILL ',id,';') |
++------------------------+
+| KILL 3101;             |
+| KILL 2946;             |
++------------------------+
+2 rows in set (0.00 sec)
+mysql> select concat('KILL ',id,';') from information_schema.processlist where user='root' and command='Sleep' into outfile '/tmp/a.txt';
+Query OK, 2 rows affected (0.00 sec)
+mysql> source /tmp/a.txt;
+Query OK, 0 rows affected (0.00 sec)
+
+--------------------------------------------------------------------------------------------------
+Get User,DB  and command information in processlist:
+
+mysql> select DB, User,substring_index(host,':',1) As Host ,command, count(*) from information_schema.processlist group by substring_index(host,':',1),command;
+-----------------------------------------------------
+
+Below command will help you to find how many number of connection are made to given mysql 
+and what are the different hosts connected to it with number of connection they are making.
+
+mysql -u root -p -h host -e"show processlist;"|awk '{print $3}'|awk -F":" '{print $1}'|sort|uniq -c
+
+Check Traffic from which IP on Server:
+--------------------------------------
+
+netstat -ntu | awk '{print $5}' | cut -d: -f1 | sort | uniq -c | sort -n
+
+Get unique state of traffic on server:
+--------------------------------------
+
+netstat -ant | awk '{print $6}' | sort | uniq -c | sort -n
+
+Check server IO timing:
+-----------------------
+time dd if=/dev/zero of=/home/napcuser/timetest bs=1M count=10000
+
+
+tcpdump help:
+-------------
+
+tcpdump -i eth0 -s 0 -l -w - dst port 3306 
+sudo /usr/sbin/tcpdump -s 1500 -w tcp.out port 3306
+sudo /usr/sbin/tcpdump -s 1500 -i bond0 tcp -w tcp_9pm.out
+sudo /usr/sbin/tcpdump -v -i eth0 -c 5 src host 66.77.88.81
+
+sudo /usr/sbin/tcpdump -l -i eth0 -w - dst port 3306 | strings
+
+http://www.mysqlperformanceblog.com/2008/08/23/how-to-track-down-the-source-of-aborted_connects/
+http://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/
+
+
+========================================
+Mongo commands :
+
+Admin User:
+----------
+use admin
+db.createUser(
+    {
+      user: "admin",
+      pwd: "pswd",
+      roles: [ "root" ]
+    }
+)
+
+use admin
+db.createRole(
+   {
+     role: "manageOpRole",
+     privileges: [
+       { resource: { cluster: true }, actions: [ "killop", "inprog" ] },
+       { resource: { db: "", collection: "" }, actions: [ "killCursors" ] }
+     ],
+     roles: []
+   }
+)
+
+Exmple Application user role:
+
+abc Monitor user:
+--------------
+use admin
+
+
+
+db.createUser(
+
+{
+user: "abcmonitor",
+
+pwd: "pswd",
+
+roles: [ { role : "clusterMonitor", db : "admin" }]
+
+
+}
+
+)
+
+
+Read/Write: 
+----------
+use DBNAME
+db.createUser(
+    {
+      user: "user",
+      pwd: "pswd",
+      roles: [
+         { role: "readWrite", db: "DBNAME" }
+      ]
+    }
+)
+
+
+Read:
+-----
+use DBNAME
+db.createUser(
+    {
+      user: "user",
+      pwd: "pswd",
+      roles: [
+         { role: "read", db: "DBNAME" }
+      ]
+    }
+)
+
+
+Updating User Role to "dbOwner":
+--------------------------------
+db.grantRolesToUser("user",[ "dbOwner"])
+
+mongodump  --authenticationDatabase "authdbname" -u authdbuser -p password -d DBNAME -o output_path
+
+mongorestore --authenticationDatabase "authdbname" -u authdbuser -p password -d DBNAME source_path
+
+scp -i ~identity_key -r source_file user@host:destination_path/
+
+===========================================
+
+
+Run Json file:
+
+
+mongoimport --authenticationDatabase=authdb -u admin -pPswd --collection coll_name --db DBNAME --jsonArray --file filename.json
+===========================================
+
+Remove multiple nodes from replica set
+
+
+cfg = rs.conf()
+cfg.members = [cfg.members[0],cfg.members[1], cfg.members[2]]
+rs.reconfig(cfg, {force : true})
+=====================================================
+
+DROP DB in shell script command:
+
+
+mongo admin -u authdb -p pswd --eval 'printjson(db.getSiblingDB("TEST").runCommand({ dropDatabase: 1 }))'
+
+
+------------------------------------
+
+
+Get count of all collections in one command: 
+--------------------------------------------
+
+db.getCollectionNames().forEach(function(name) {
+    if (!name.startsWith("system.")) {
+       print("Getting document count from collection [" + name + "]: " + db.getCollection(name).count());
+    }
+})
+
+Get Size of each collection in DB sorted by Size: 
+--------------------------------------------------
+
+use DBNAME
+var collectionNames = db.getCollectionNames(), stats = [];
+collectionNames.forEach(function (n) { stats.push(db[n].stats()); });
+var sorted_stats = stats.sort(function(a, b) { return b['size'] - a['size']; });
+for (var c in sorted_stats) { print(sorted_stats[c]['ns'] + ": " + Math.round(sorted_stats[c]['size']/ (1073741824)) + 'GB'); }
+
+To Drop all collections from a particular DB at a time except system.indexes collection
+---------------------------------------------------------------------------------------------------------
+db.getCollectionNames().forEach(function(c) {if(!c.match("^system.indexes")) {db.getCollection(c).drop();}});
+=============================
+
+Get All index list from DB:
+
+
+db.getCollectionNames().forEach(function(collection) {
+   indexes = db[collection].getIndexes();
+   print("Indexes for " + db +"." + collection + ":");
+   printjson(indexes);
+});
+
+
+
+To truncate a collection and keep the indexes use
+
+ db.<collection>.remove({})
+
+To drop all the data and indexes in a collection with 
+
+ db.collection.drop()
+

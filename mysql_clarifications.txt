@@ -1,0 +1,9 @@
+1. If we have more than 5 lakh records, is it possible to add index ? 11:55 AM 
+in production server how we can do it ?
+
+http://dba.stackexchange.com/questions/54211/adding-index-to-large-mysql-tables   will help, first u shud try on non prod to chk how long it takes, then try the above method on prod
+
+
+2. can you tell me how msql master/slave is configured and how it will work ? 
+
+it is for data safety basically and to keep DB availabale to the App at any given point of time ,  if master goes down , slave will become master and will serve the app ...... application will connect from VIP  and if master is down, VIP will direct to slave and it will act as master ......
